@@ -1,0 +1,7 @@
+finance_tracker\AdminControllerTest.class
+finance_tracker\TransactionControllerTest.class
+finance_tracker\AuthServiceTest.class
+finance_tracker\FinanceTrackerApplicationTests.class
+finance_tracker\JwtUtilTest.class
+finance_tracker\JwtFilterTest.class
+finance_tracker\AuthControllerTest.class

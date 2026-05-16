@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableWebSecurity
@@ -63,10 +64,10 @@ public class SecurityConfig
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/**").authenticated()
                         .anyRequest().authenticated()
-
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -77,7 +78,7 @@ public class SecurityConfig
     public CorsConfigurationSource corsConfigurationSource()
     {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*");
+        config.setAllowedOriginPatterns(List.of("*"));
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
